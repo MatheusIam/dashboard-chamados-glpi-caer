@@ -4,8 +4,8 @@ const fetchTicketData = async () => {
   const apiUrl = "http://172.16.95.125/apirest.php/Ticket";
   const headers = {
     "Content-Type": "application/json",
-    "App-Token": process.env.AppToken || "",
-    "Session-Token": process.env.SessionToken || "",
+    "App-Token": process.env.NEXT_PUBLIC_AppToken || "",
+    "Session-Token": process.env.NEXT_PUBLIC_SessionToken || "",
   };
 
   try {
