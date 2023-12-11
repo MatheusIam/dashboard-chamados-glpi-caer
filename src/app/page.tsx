@@ -6,7 +6,17 @@ const Home = () => {
   return (
     <Container maxWidth="xl">
       <div style={{ display: "flex" }}>
-        <div style={{ flex: 1, marginRight: "16px" }}>mapa</div>
+        <div
+          style={{
+            flex: 1,
+            marginRight: "16px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div>box 1</div>
+          <div>box 2</div>
+        </div>
         <div style={{ flex: 1 }}>
           <TicketTable />
         </div>
