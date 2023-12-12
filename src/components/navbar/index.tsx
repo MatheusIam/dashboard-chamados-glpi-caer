@@ -16,9 +16,15 @@ const Navbar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Mapa de chamados
           </Typography>
-          <Button color="inherit">Dashboard</Button>
-          <Button color="inherit">Ranking</Button>
-          <Button color="inherit">Rede</Button>
+          <Button color="inherit" href="/">
+            Dashboard
+          </Button>
+          <Button color="inherit" href="/ranking">
+            Ranking
+          </Button>
+          <Button color="inherit" href="/rede">
+            Rede
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
