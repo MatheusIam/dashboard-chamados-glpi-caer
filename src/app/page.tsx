@@ -1,6 +1,6 @@
 "use client";
 import TicketTable from "@/components/tabelachamados";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 const Home = () => {
   return (
@@ -14,8 +14,12 @@ const Home = () => {
             flexDirection: "column",
           }}
         >
-          <div>box 1</div>
-          <div>box 2</div>
+          <div>
+            <Typography> ranking </Typography>
+          </div>
+          <div>
+            <Typography> fila de atendimento </Typography>
+          </div>
         </div>
         <div style={{ flex: 1 }}>
           <TicketTable />

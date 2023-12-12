@@ -1,7 +1,10 @@
 import { TicketProps } from "./ticketprops";
+import { mockData } from "./mock";
 
 const fetchTicketData = async (): Promise<TicketProps[]> => {
-  const apiUrl = "http://172.16.95.125/apirest.php/Ticket?order=desc";
+  //   const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/Ticket?order=desc`;
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_INTERNET}/apirest.php/Ticket?order=desc`;
+
   const headers = {
     "Content-Type": "application/json",
     "App-Token": process.env.NEXT_PUBLIC_AppToken || "",
@@ -16,7 +19,12 @@ const fetchTicketData = async (): Promise<TicketProps[]> => {
     }
 
     const responseData = await response.json();
-    return responseData;
+    const filteredData = responseData.filter(
+      (ticket: TicketProps) =>
+        ticket.itilcategories_id !== 72 && ticket.status === 1
+    );
+
+    return filteredData;
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Não foi possível coletar os dados do GLPI", error.message);
