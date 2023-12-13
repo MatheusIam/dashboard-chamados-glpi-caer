@@ -1,21 +1,39 @@
 import fetchTicketData from "./fetchticket";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { TicketProps } from "./ticketprops";
+import { SetorProps } from "./setorprops";
 import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
+import fetchSetorData from "./fetchsetor";
 
-const fetchData = async () => {
-  try {
-    return await fetchTicketData();
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+// export const getSetorById = (id: number) => {
+//   const setores = fetchSetorData();
+//   // Encontre a linha com o ID desejado
+//   const setorEncontrado = setores.find((setor: any) => setor.id === id);
+
+//   // Se o setor for encontrado, retorne o campo COMMENT
+//   if (setorEncontrado) {
+//     return setorEncontrado.comment;
+//   } else {
+//     // Retorne alguma coisa caso o ID não seja encontrado
+//     return null; // Ou lance uma exceção, dependendo do comportamento desejado
+//   }
+// };
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", flex: 1 },
-  { field: "name", headerName: "Título", flex: 2 },
+  {
+    field: "locations_id",
+    headerName: "Setor",
+    flex: 1,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    flex: 3,
+  },
+  { field: "users_id_recipient", headerName: "Autor", flex: 1 },
+  { field: "name", headerName: "Título", flex: 8 },
 ];
 const TicketTable = () => {
   const [data, setData] = useState<TicketProps[]>([]);
@@ -24,10 +42,11 @@ const TicketTable = () => {
     const fetchData = async () => {
       try {
         const ticketData = await fetchTicketData();
+
         setData(ticketData);
       } catch (error) {
         // Handle error as needed
-        console.error("Error fetching ticket data:", error);
+        console.error("Erro baixando os dados de ticket:", error);
       }
     };
 

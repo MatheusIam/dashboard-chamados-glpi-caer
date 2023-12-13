@@ -18,7 +18,6 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={robotoSlab.className}>
-        {" "}
         <Navbar />
         {children}
       </body>

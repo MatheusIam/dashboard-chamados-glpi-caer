@@ -1,8 +1,9 @@
-import { TicketProps } from "./ticketprops";
-import { mockData } from "./mock";
+import { SetorProps } from "./setorprops";
 
-const fetchTicketData = async (): Promise<TicketProps[]> => {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/Ticket?order=desc`;
+
+
+const fetchSetorData = async (): Promise<SetorProps[]> => {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/location`;
   // const apiUrl = `${process.env.NEXT_PUBLIC_API_INTERNET}/apirest.php/Ticket?order=desc`;
 
   const headers = {
@@ -19,11 +20,10 @@ const fetchTicketData = async (): Promise<TicketProps[]> => {
     }
 
     const responseData = await response.json();
-    const filteredData = responseData.filter(
-      (ticket: TicketProps) =>
-        ticket.itilcategories_id !== 72 &&
-        (ticket.status === 1 || ticket.status === 2)
-    );
+    const filteredData = responseData.map(({ id, comment }: SetorProps) => ({
+      id,
+      comment,
+    }));
 
     console.log(filteredData);
     return filteredData;
@@ -37,4 +37,4 @@ const fetchTicketData = async (): Promise<TicketProps[]> => {
   }
 };
 
-export default fetchTicketData;
+export default fetchSetorData;
