@@ -4,18 +4,18 @@ import { BarChart } from "@mui/x-charts";
 const RankingChartComponent = () => {
   return (
     <Box sx={{ width: "100%", height: "100%" }}>
-      <Typography>Ranking de chamados</Typography>
+      <Typography>Ranking de Atendimentos do Mês</Typography>
       <BarChart
         xAxis={[
           {
             id: "barCategories",
-            data: ["bar A", "bar B", "bar C"],
+            data: ["Matheus", "Vinicius", "Estevam"],
             scaleType: "band",
           },
         ]}
         series={[
           {
-            data: [2, 5, 3],
+            data: [200, 54, 45],
           },
         ]}
         width={500}

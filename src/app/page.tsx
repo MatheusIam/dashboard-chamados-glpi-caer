@@ -22,7 +22,7 @@ const Home = () => {
           </div>
           <div>
             <Box sx={{ width: "100%", height: "100%" }}>
-              <Typography>Mais queridos</Typography>
+              <Typography>Mais Queridos da Semana❤️</Typography>
               <MaisQueridosChartComponent />
             </Box>
           </div>

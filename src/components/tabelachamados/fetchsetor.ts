@@ -1,7 +1,5 @@
 import { SetorProps } from "./setorprops";
 
-
-
 const fetchSetorData = async (): Promise<SetorProps[]> => {
   const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/location`;
   // const apiUrl = `${process.env.NEXT_PUBLIC_API_INTERNET}/apirest.php/Ticket?order=desc`;

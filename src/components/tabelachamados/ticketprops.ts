@@ -38,7 +38,7 @@ export interface TicketProps {
   takeintoaccount_delay_stat: number;
   actiontime: number;
   is_deleted: number;
-  locations_id: number;
+  locations_id: number | string;
   validation_percent: number;
   date_creation: string;
   links: Link[];
