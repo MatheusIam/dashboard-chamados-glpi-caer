@@ -7,7 +7,7 @@ export interface UserProps {
   mobile: any;
   realname: any;
   firstname: any;
-  locations_id: number;
+  locations_id: number | string;
   language: any;
   use_mode: number;
   list_limit: number;

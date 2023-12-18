@@ -67,8 +67,8 @@ const TicketTable = () => {
     };
 
     fetchData();
-    // Set up interval to fetch data every 500ms
-    const intervalId = setInterval(fetchData, 500);
+    // Set up interval to fetch data every 1 minute
+    const intervalId = setInterval(fetchData, 60000);
 
     // Clean up the interval on component unmount
     return () => clearInterval(intervalId);

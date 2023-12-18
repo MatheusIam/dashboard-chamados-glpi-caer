@@ -1,9 +1,8 @@
-import { TicketProps } from "./ticketprops";
-import { mockData } from "./mock";
+import { TicketProps } from "../tabelachamados/ticketprops";
 
-const fetchTicketData = async (): Promise<TicketProps[]> => {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/Ticket?order=desc&glpilist_limit=250`;
-  const apiUrl2 = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/Ticket?expand_dropdowns=true&order=desc&glpilist_limit=250`;
+const fetchAllTicketData = async (): Promise<TicketProps[]> => {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/Ticket?order=desc&glpilist_limit=9999`;
+  const apiUrl2 = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/Ticket?expand_dropdowns=true&order=desc&glpilist_limit=9999`;
 
   const headers = {
     "Content-Type": "application/json",
@@ -24,8 +23,7 @@ const fetchTicketData = async (): Promise<TicketProps[]> => {
     // Filter data from apiUrl
     const filteredData = responseData.filter(
       (ticket: TicketProps) =>
-        ticket.itilcategories_id !== 72 &&
-        (ticket.status === 1 || ticket.status === 2)
+        ticket.itilcategories_id !== 72 && ticket.status === 5
     );
 
     // Fetch data from apiUrl2
@@ -63,4 +61,4 @@ const fetchTicketData = async (): Promise<TicketProps[]> => {
   }
 };
 
-export default fetchTicketData;
+export default fetchAllTicketData;

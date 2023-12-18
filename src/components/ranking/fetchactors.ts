@@ -1,18 +1,12 @@
 import { UserProps } from "./userprops";
 
-const filtrarGTI = (users: UserProps[]) => {
-  let usersGTI: UserProps[] = [];
-  users.forEach((user) => {
-    if (user.entities_id === 0 && user.is_active === 1) {
-      usersGTI.push(user);
-    }
-  });
-  return usersGTI;
-};
+export interface actorRankingProps {
+  name: string;
+  qtd: number;
+}
 
-const fetchUsersData = async (): Promise<UserProps[]> => {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/User`;
-  // const apiUrl = `${process.env.NEXT_PUBLIC_API_INTERNET}/apirest.php/Ticket?order=desc`;
+const fetchUsersData = async (): Promise<actorRankingProps[]> => {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/User?expand_dropdowns=true`;
 
   const headers = {
     "Content-Type": "application/json",
@@ -28,13 +22,21 @@ const fetchUsersData = async (): Promise<UserProps[]> => {
     }
 
     const responseData = await response.json();
+    console.log("Actor Data:", responseData);
 
-    // Precisa retornar assim: [{nome: "Matheus", qtdChamados: 59}, ...]
-    return responseData;
+    const actorRanking: actorRankingProps[] = responseData
+      .filter(
+        (user: UserProps) =>
+          user.locations_id === "GERÊNCIA DE TECNOLOGIA DA INFORMAÇÃO"
+      )
+      .map((user: UserProps) => ({ name: user.name, qtd: 0 }));
+
+    console.log("Actor Ranking:", actorRanking);
+    return actorRanking;
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(
-        "Não foi possível coletar os dados de USUARIOS do GLPI",
+        "Não foi possível coletar os dados de ATORES do GLPI",
         error.message
       );
     } else {
