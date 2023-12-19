@@ -5,7 +5,7 @@ export interface actorRankingProps {
   qtd: number;
 }
 
-const fetchUsersData = async (): Promise<actorRankingProps[]> => {
+const fetchGTIUsersData = async (): Promise<actorRankingProps[]> => {
   const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/User?expand_dropdowns=true`;
 
   const headers = {
@@ -46,4 +46,4 @@ const fetchUsersData = async (): Promise<actorRankingProps[]> => {
   }
 };
 
-export default fetchUsersData;
+export default fetchGTIUsersData;
