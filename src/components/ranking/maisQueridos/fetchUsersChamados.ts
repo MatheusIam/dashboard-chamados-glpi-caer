@@ -24,9 +24,9 @@ const fetchUsersData = async (): Promise<actorRankingProps[]> => {
     const responseData = await response.json();
     console.log("Actor Data:", responseData);
 
-    const actorRanking: actorRankingProps[] = responseData.map(
-      (user: UserProps) => ({ name: user.name, qtd: 0 })
-    );
+    const actorRanking: actorRankingProps[] = responseData
+      .filter((user: UserProps) => user.is_active === 1)
+      .map((user: UserProps) => ({ name: user.name, qtd: 0 }));
 
     console.log("Actor Ranking:", actorRanking);
     return actorRanking;
