@@ -37,10 +37,14 @@ const RankingChartComponent = () => {
     };
 
     fetchData();
+    console.log("First time data fetched");
+
+    const interval = setInterval(fetchData, 5000);
 
     // Limpar a flag de montagem quando o componente for desmontado
     return () => {
       isMounted = false;
+      clearInterval(interval);
     };
   }, []); // Certifique-se de passar um array vazio como segundo argumento para o useEffect
 
@@ -50,16 +54,23 @@ const RankingChartComponent = () => {
 
   const setDeDados = dataset.sort((a, b) => b.qtd - a.qtd);
   const top5Dataset = setDeDados.slice(0, 5);
-  console.log("TOP 5 DATASET:", top5Dataset);
 
+  // O dataset recebe {nome: "name.lastname", qtd: 0}
+  for (let i = 0; i < top5Dataset.length; i++) {
+    const nome = top5Dataset[i].nome;
+    const nomeArray = nome.split(".");
+    const nomePrimeiroNome = `${nomeArray[0]
+      .charAt(0)
+      .toUpperCase()}${nomeArray[0].slice(1)}`;
+    top5Dataset[i].nome = nomePrimeiroNome;
+  }
   return (
-    <Box sx={{ width: "100%", height: "100%" }}>
-      <Typography>Ranking de Atendimentos do Mês</Typography>
+    <Box sx={{ width: "100%" }}>
       <BarChart
         dataset={top5Dataset.map((item) => ({ ...item }))}
         xAxis={[{ scaleType: "band", dataKey: "nome" }]}
         series={[{ type: "bar", dataKey: "qtd" }]}
-        width={500}
+        width={700}
         height={300}
       />
     </Box>

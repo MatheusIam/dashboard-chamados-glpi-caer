@@ -12,8 +12,18 @@ const updateActorRanking = async (): Promise<actorRankingProps[]> => {
     "Session-Token": process.env.NEXT_PUBLIC_SessionToken || "",
   };
 
+  const ticketsDe1Mes = tickets.filter((ticket) => {
+    const data = new Date(ticket.date_creation);
+    const dataAtual = new Date().getMonth();
+    // const umMesAtras = new Date(dataAtual.setMonth(dataAtual.getMonth() - 1));
+    console.log("Data:", data);
+    return data.getMonth() == dataAtual;
+  });
+
+  console.log("Tickets de 1 mês:", ticketsDe1Mes);
+
   // Para cada ticket, fazer um fetch na rota correspondente
-  for (const ticket of tickets) {
+  for (const ticket of ticketsDe1Mes) {
     // Obter o id do ticket
     const ticketId = ticket.id;
 
