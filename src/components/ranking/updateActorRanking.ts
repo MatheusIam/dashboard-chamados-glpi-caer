@@ -16,7 +16,6 @@ const updateActorRanking = async (): Promise<actorRankingProps[]> => {
     const data = new Date(ticket.date_creation);
     const dataAtual = new Date().getMonth();
     // const umMesAtras = new Date(dataAtual.setMonth(dataAtual.getMonth() - 1));
-    console.log("Data:", data);
     return data.getMonth() == dataAtual;
   });
 

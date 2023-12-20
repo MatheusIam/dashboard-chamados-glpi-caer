@@ -40,18 +40,17 @@ const fetchUsersData = async (
 
 let actors: actorsInATicketProps[] = [];
 
-const fetchActorsInATicket = async (): Promise<unknown> => {
+const fetchActorsInATicket = async (): Promise<actorsInATicketProps[]> => {
   const tickets = await fetchTicketData();
 
-  // Puxar o ID dos tickets e usar a rota Ticket/:id/Ticket_User/?expand_dropdowns=true
-
-  tickets.forEach((ticket) => {
+  const actorPromises = tickets.map(async (ticket) => {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/Ticket/${ticket.id}/Ticket_User/?expand_dropdowns=true`;
-    const actorsInATicket = fetchUsersData(apiUrl);
-    console.log(actorsInATicket);
+    const actorsInATicket = await fetchUsersData(apiUrl);
+    return actorsInATicket;
   });
 
-  return null;
+  const actors = await Promise.all(actorPromises);
+  return actors.flat(); // Flatten the array of arrays into a single array
 };
 
 export default fetchActorsInATicket;

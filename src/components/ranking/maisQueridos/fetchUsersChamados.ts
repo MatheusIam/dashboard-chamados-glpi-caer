@@ -1,11 +1,11 @@
-import { UserProps } from "./userprops";
+import { UserProps } from "../userprops";
 
 export interface actorRankingProps {
   name: string;
   qtd: number;
 }
 
-const fetchGTIUsersData = async (): Promise<actorRankingProps[]> => {
+const fetchUsersData = async (): Promise<actorRankingProps[]> => {
   const apiUrl = `${process.env.NEXT_PUBLIC_API_INTRANET}/apirest.php/User?expand_dropdowns=true`;
 
   const headers = {
@@ -25,10 +25,7 @@ const fetchGTIUsersData = async (): Promise<actorRankingProps[]> => {
     console.log("Actor Data:", responseData);
 
     const actorRanking: actorRankingProps[] = responseData
-      .filter(
-        (user: UserProps) =>
-          user.locations_id === "GERÊNCIA DE TECNOLOGIA DA INFORMAÇÃO"
-      )
+      .filter((user: UserProps) => user.is_active === 1)
       .map((user: UserProps) => ({ name: user.name, qtd: 0 }));
 
     console.log("Actor Ranking:", actorRanking);
@@ -46,4 +43,4 @@ const fetchGTIUsersData = async (): Promise<actorRankingProps[]> => {
   }
 };
 
-export default fetchGTIUsersData;
+export default fetchUsersData;

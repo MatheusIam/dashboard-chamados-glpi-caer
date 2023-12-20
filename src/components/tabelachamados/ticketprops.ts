@@ -9,7 +9,7 @@ export interface TicketProps {
   date_mod: string;
   users_id_lastupdater: number;
   status: number;
-  users_id_recipient: number;
+  users_id_recipient: number | string;
   requesttypes_id: number;
   content: string;
   urgency: number;
