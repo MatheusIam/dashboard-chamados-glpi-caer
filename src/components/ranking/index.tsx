@@ -39,7 +39,7 @@ const RankingChartComponent = () => {
     fetchData();
     console.log("First time data fetched");
 
-    const interval = setInterval(fetchData, 5000);
+    const interval = setInterval(fetchData, 60000);
 
     // Limpar a flag de montagem quando o componente for desmontado
     return () => {
