@@ -7,7 +7,7 @@ import Container from "@mui/material/Container";
 import zIndex from "@mui/material/styles/zIndex";
 const Home = () => {
   return (
-    <Container maxWidth="100%">
+    <Container maxWidth={false}>
       <div style={{ display: "flex" }}>
         <div
           style={{
