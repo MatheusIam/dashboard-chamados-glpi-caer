@@ -17,7 +17,7 @@ const columns: GridColDef[] = [
   {
     field: "status",
     headerName: "Status",
-    flex: 2,
+    flex: 3,
     renderCell: (params) =>
       params.value === 1 ? (
         <Chip label="Novo" color="success" />

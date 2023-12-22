@@ -39,27 +39,11 @@ const updateActorRanking = async (): Promise<actorRankingProps[]> => {
         const actor = actorRanking.find((actor) => actor.name === tecnico);
         if (actor) {
           actor.qtd++;
-          console.log("Incrementando Qtd para", actor.name);
         }
       }
     }
 
     console.log("Ticket:", ticketData);
-
-    // Verificar se o tipo é 2, que é correspondente a técnico atribuído
-    // if (ticketData.type === 2) {
-    //   // Obter o id do usuário
-    //   const userId = ticketData.users_id;
-
-    //   // Procurar o usuário no array de atores
-    //   const actor = actorRanking.find((actor) => actor.name === userId);
-
-    //   // Se encontrar, incrementar a propriedade qtd
-    //   if (actor) {
-    //     actor.qtd++;
-    //     console.log("Incrementando Qtd para", actor.name);
-    //   }
-    // }
   }
 
   console.log("Tickets:", tickets);
