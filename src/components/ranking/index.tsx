@@ -66,12 +66,20 @@ const RankingChartComponent = () => {
   }
   return (
     <Box sx={{ width: "100%" }}>
-      <Typography sx={{ margin: 0 }}>Ranking de atendimentos do mês</Typography>
+      <Typography sx={{ margin: 0 }} variant="h4">
+        Ranking de Atendimentos do Mês
+      </Typography>
       <BarChart
+        sx={{ width: "100%" }}
         dataset={top5Dataset.map((item) => ({ ...item }))}
-        xAxis={[{ scaleType: "band", dataKey: "nome" }]}
+        xAxis={[
+          {
+            scaleType: "band",
+            dataKey: "nome",
+            tickLabelStyle: { fontSize: 20 },
+          },
+        ]}
         series={[{ type: "bar", dataKey: "qtd" }]}
-        width={700}
         height={300}
       />
     </Box>

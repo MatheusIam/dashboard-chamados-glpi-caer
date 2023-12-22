@@ -71,10 +71,16 @@ const MaisQueridosChartComponent = () => {
   return (
     <Box sx={{ width: "100%" }}>
       <BarChart
+        sx={{ width: "100%" }}
         dataset={top5Dataset.map((item) => ({ ...item }))}
-        xAxis={[{ scaleType: "band", dataKey: "nome" }]}
+        xAxis={[
+          {
+            scaleType: "band",
+            dataKey: "nome",
+            tickLabelStyle: { fontSize: 20 },
+          },
+        ]}
         series={[{ type: "bar", dataKey: "qtd" }]}
-        width={700}
         height={300}
       />
     </Box>

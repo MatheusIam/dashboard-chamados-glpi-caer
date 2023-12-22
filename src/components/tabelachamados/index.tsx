@@ -15,6 +15,12 @@ const columns: GridColDef[] = [
     align: "center",
   },
   {
+    field: "date",
+    headerName: "Data",
+    flex: 3,
+    align: "center",
+  },
+  {
     field: "status",
     headerName: "Status",
     flex: 3,
