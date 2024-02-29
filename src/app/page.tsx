@@ -1,37 +1,35 @@
-"use client";
-import RankingChartComponent from "@/components/ranking";
-import MaisQueridosChartComponent from "@/components/ranking/maisQueridos";
-import TicketTable from "@/components/tabelachamados";
-import { Box, Typography } from "@mui/material";
-import Container from "@mui/material/Container";
-import zIndex from "@mui/material/styles/zIndex";
+import { Box, Grid, Typography } from "@mui/material";
+import TabelaChamadosV2 from "@/components/v2/fetchTickets";
+
+import RankingGraph from "@/components/v2/rankingGraph";
 const Home = () => {
   return (
-    <Container maxWidth={false}>
-      <div style={{ display: "flex" }}>
-        <div
-          style={{
-            flex: 2,
-            marginRight: "16px",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div>
-            <RankingChartComponent />
-          </div>
-          <div>
-            <Box sx={{ width: "100%", height: "100%" }}>
-              <Typography variant="h4">Mais Queridos da Semana❤️</Typography>
-              <MaisQueridosChartComponent />
+    <Box>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <TabelaChamadosV2 />
+        </Grid>
+        <Grid item xs={6}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box width={"100%"} height={"50vh"}>
+              <RankingGraph />
             </Box>
-          </div>
-        </div>
-        <div style={{ flex: 3 }}>
-          <TicketTable />
-        </div>
-      </div>
-    </Container>
+            <Box
+              sx={{
+                height: "48vh",
+                width: "98%",
+                backgroundColor: "red",
+                marginLeft: 2,
+              }}
+            >
+              <Typography variant="h3" color="initial">
+                Fila de atendimento
+              </Typography>
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
