@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={robotoSlab.className}>
+      <body className={robotoSlab.className} style={{ background: "#273c75" }}>
         <Navbar />
         {children}
       </body>
