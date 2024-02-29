@@ -12,14 +12,14 @@ export function useFetchTickets() {
 
       try {
         const conn = await mariadb.createConnection({
-          host: process.env.DB_HOST,
-          user: process.env.DB_USER,
-          password: process.env.DB_PASS,
-          database: "glpi10",
+          host: process.env.NEXT_PUBLIC_API_DB_HOST,
+          user: process.env.NEXT_PUBLIC_API_DB_USER,
+          password: process.env.NEXT_PUBLIC_API_DB_PASSWORD,
+          database: process.env.NEXT_PUBLIC_API_DB_NAME,
         });
 
-        const result = await conn.query("SELECT * FROM table-name"); // Replace 'table-name'
-        setTickets(result); // Assuming your result is an array of ticket objects
+        const result = await conn.query("SELECT * FROM glpi_tickets");
+        setTickets(result);
         setError(null);
       } catch (err: any) {
         setError(err);
