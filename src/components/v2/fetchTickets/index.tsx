@@ -12,9 +12,24 @@ import {
   Grid,
   Modal,
   Button,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import sanitizeHtml from "sanitize-html";
+import ListSubheader from "@mui/material/ListSubheader";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import DraftsIcon from "@mui/icons-material/Drafts";
+import SendIcon from "@mui/icons-material/Send";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import StarBorder from "@mui/icons-material/StarBorder";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export type Chamados = Chamado[];
 
@@ -207,6 +222,30 @@ const extractString = (html: string): string => {
 // dentro do modal
 const ModalContent = ({ ticket }: ticketCardProps) => {
   const htmlsanitized = extractString(ticket.content);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  let [nestedUserList, setNestedUserList] = useState(false);
+
+  const handleClickNestedItem = () => {
+    setNestedUserList(!nestedUserList);
+  };
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+    setNestedUserList(false);
+  };
+
+  useEffect(() => {
+    // Perform any side-effects related to nestedUserList
+    console.log("nestedUserList updated:", nestedUserList);
+  }, [nestedUserList]);
+
+  let menuData = ["- Próximo da fila -", "Outro usuário"];
+  let usersData = ["fulano", "ciclano", "beltrano"];
 
   return (
     <div>
@@ -218,12 +257,63 @@ const ModalContent = ({ ticket }: ticketCardProps) => {
       </Typography>
       <Grid container spacing={1}>
         <Grid item xs={12} sm={6}>
-          <Button fullWidth>
+          <Button
+            fullWidth
+            onClick={handleClick}
+            id="demo-positioned-button"
+            aria-controls={open ? "demo-positioned-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+          >
             <Typography justifyContent={"center"}>Atribuir chamado</Typography>
           </Button>
+          <Menu
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            sx={{ overflowY: "scroll" }}
+          >
+            {menuData.map((option) => (
+              <MenuItem key={option} onClick={handleClose}>
+                {option}
+              </MenuItem>
+            ))}
+            <ListItemButton onClick={handleClickNestedItem}>
+              teste
+            </ListItemButton>
+            <Collapse in={nestedUserList} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {usersData.map((option) => (
+                  <ListItemButton key={option} onClick={handleClose}>
+                    <ListItemIcon>
+                      <AccountCircleIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={option} />
+                  </ListItemButton>
+                ))}
+              </List>
+            </Collapse>
+          </Menu>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Button fullWidth>
+          <Button
+            fullWidth
+            onClick={() =>
+              window.open(
+                `${process.env.NEXT_PUBLIC_API_GLPI_BASE_URL_TICKET}/?id=${ticket.id}`
+              )
+            }
+          >
             <Typography justifyContent={"center"}>Página GLPI</Typography>
           </Button>
         </Grid>

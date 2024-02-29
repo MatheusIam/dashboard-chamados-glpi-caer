@@ -13,7 +13,7 @@ export async function GET() {
   });
 
   const result = await conn.query(
-    "SELECT * FROM glpi_tickets WHERE status = 1 OR status = 2 AND is_deleted != 1 AND itilcategories_id NOT IN (72, 74, 78, 79, 76, 75, 77, 11) ORDER BY id DESC LIMIT 50",
+    "SELECT * FROM glpi_tickets WHERE status = 1 AND is_deleted != 1 AND itilcategories_id NOT IN (72, 74, 78, 79, 76, 75, 77, 11) ORDER BY id DESC LIMIT 50",
     (err: any, res: any, meta: any) => {
       if (err) {
         console.error("Error querying data: ", err);
